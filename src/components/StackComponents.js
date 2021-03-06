@@ -4,9 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {
   View,
 } from 'react-native';
-import SignInScreen from './src/screens/SignIn'
-import SignUpScreen from './src/screens/SignUp'
-import HomeScreen from './src/screens/Home'
+import { Appbar } from 'react-native-paper';
+import SignInScreen from '../screens/SignIn'
+import SignUpScreen from '../screens/SignUp'
+import HomeScreen from '../screens/Home'
 
 const AuthStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -21,7 +22,7 @@ function CustomNavigationBar({scene, navigation, previous}) {
       ? options.title
       : scene.route.name;
   return (
-    <Appbar.Header>
+    <Appbar.Header style={{backgroundColor:"#455745"}}>
       {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title={title}/>
     </Appbar.Header>
@@ -52,4 +53,4 @@ const HomeStackContainer = () => {
   );
 }
 
-export {AuthStackContainer, HomeStackContainer}
+export {AuthStackContainer, HomeStackContainer};
