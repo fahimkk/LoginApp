@@ -5,15 +5,18 @@ import {
   Text,
 } from 'react-native';
 import { Button } from 'react-native-paper';
+import {AuthContext, UserContext} from '../components/Contexts';
 
 const Home = () => {
+  const {signOut} = React.useContext(AuthContext);
+  const {user} = React.useContext(UserContext);
   return (
     <View>
       <Text>
-        Home Page  
+        {user}  
       </Text>
-      <Button mode="contained" onPress={() => console.log('Pressed')} color="red">
-        Home
+      <Button mode="contained" onPress={() => signOut()} color="red">
+       Sign Out 
       </Button>
     </View>
   );

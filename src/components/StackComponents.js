@@ -45,10 +45,10 @@ const AuthStackContainer = () => {
 const HomeStackContainer = () => {
   return (
     <HomeStack.Navigator
-      initialRouteName="SignIn"
+      initialRouteName="Home"
       screenOptions={{header: (props) => <CustomNavigationBar {...props}/>,}}>
-        <HomeStack.Screen name="SignIn" component={HomeScreen}
-        options={{title:'Sign In'}} />
+        <HomeStack.Screen name="Home" component={HomeScreen}
+        options={{title:'Home'}} />
     </HomeStack.Navigator>
   );
 }

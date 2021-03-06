@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   StyleSheet,
   Dimensions,
+  Text
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
@@ -20,16 +21,19 @@ const InputBox = (args) => {
       placeholder={args.type}
       secureTextEntry={secure}
       right={<TextInput.Icon name={args.icon} color="#9e9e9e" />}
+      onChangeText={args.onChange}
     />
   );
 }
 
-const SubmitButton = (args) => {
-  return (
-    <Button style={styles.btn} mode={args.mode} color="#455745">
-      {args.title} 
-    </Button>
-  );
+const ErrorText = (value)=>{
+    if (value.errMsg == "incorrect"){
+        return(
+            <Text style={styles.errorText}> Incorrect Password !!</Text>
+        );
+    } else return (
+            <Text>  </Text>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -37,12 +41,10 @@ const styles = StyleSheet.create({
     height:50,
     padding:5,
   },
-  btn:{
-    padding:3,
-    margin:5,
-    marginTop:20,
-    borderWidth:1,
-    borderColor:"#455745"
+  errorText: {
+    color: "red",
+    fontSize: 20,
+    textAlign: "center",
   },
 
 });
@@ -62,6 +64,13 @@ export const globalStyles = StyleSheet.create({
     paddingTop:25,
     paddingBottom:25,
   },
+  btn:{
+    padding:3,
+    margin:5,
+    marginTop:20,
+    borderWidth:1,
+    borderColor:"#455745"
+  },
   
 })
-export {InputBox, SubmitButton};
+export {InputBox, ErrorText};
