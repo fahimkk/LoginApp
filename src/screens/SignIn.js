@@ -2,21 +2,18 @@ import * as React from 'react';
 import {
   View,
   StyleSheet,
+  Alert
 } from 'react-native';
-import { Button } from 'react-native-paper';
-import {InputBox, ErrorText, globalStyles } from '../components/Components';
+import { Button, Portal, Dialog, Paragraph } from 'react-native-paper';
+import {InputBox, ErrorText, globalStyles,fetchApi,AlertBox, } from '../components/Components';
 import {AuthContext, UserContext} from '../components/Contexts';
 
 const SignInScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [incorrectMsg, setIncorrectMsg] = React.useState('');
-    const onChangeEmail = (value)=>{
-      setEmail(value);
-    }
-    const onChangePassword = (value)=>{
-      setPassword(value);
-    }
+    const onChangeEmail = (value)=> setEmail(value);
+    const onChangePassword = (value)=> setPassword(value);
 
     // AuthContext from app will return any of signIn Up or Out function
     const {signIn} = React.useContext(AuthContext);
@@ -24,39 +21,47 @@ const SignInScreen = ({navigation}) => {
     const {setUser} = React.useContext(UserContext);
 
     const sendData = (email, password) =>{
-      console.log(email,password);
-      fetch('http://10.0.2.2:5000/', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        })
-        // convert response into json format
-      }).then(response => response.json()
-      ).then(response => {
-        const status = response.status
-        const username = response.username
-        if (status == "nil"){
-          navigation.navigate('SignUp')
-        }else if (status == "success"){
-          // Pass username to Home page
-          setUser(username);
-          // Change Auth Stack to Account Stack
-          signIn();
-        }else{
-          setIncorrectMsg(response.status);
-        }
-      });
+      if (email.trim() == "" || password ==""){
+        AlertBox();
+      } else{
+        fetch(fetchApi, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          })
+          // convert response into json format
+        }).then(response => response.json()
+        ).then(response => {
+          const status = response.status
+          const username = response.username
+          if (status == "nil"){
+            navigation.navigate('SignUp')
+          }else if (status == "success"){
+            // Pass username to Home page
+            setUser(username);
+            // Change AuthStack to HomeStack
+            signIn();
+          }else{
+            // db error or incorrect password error
+            setIncorrectMsg(status);
+          }
+        }).catch(error => {
+            console.log("Connection Error: ", error);
+            setIncorrectMsg("networkError")
+        });
+      }
     }
   return (
     <View style={globalStyles.mainContainer}>
       <View style={globalStyles.formContainer}>
-        <InputBox type="Email" icon="user" onChange={onChangeEmail} /> 
+        <InputBox type="Email" icon="email" onChange={onChangeEmail} /> 
         <InputBox type="Password" icon="lock" onChange={onChangePassword} /> 
+
         <ErrorText errMsg = {incorrectMsg}/>
 
         <Button style={globalStyles.btn} mode="contained" color="#455745"

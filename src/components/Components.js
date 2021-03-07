@@ -2,9 +2,12 @@ import * as React from 'react';
 import {
   StyleSheet,
   Dimensions,
-  Text
+  Text,
+  Alert,
+  View,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, Portal, Dialog, Paragraph } from 'react-native-paper';
+import {Icon} from 'react-native-vector-icons/MaterialIcons';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,26 +32,54 @@ const InputBox = (args) => {
 const ErrorText = (value)=>{
     if (value.errMsg == "incorrect"){
         return(
-            <Text style={styles.errorText}> Incorrect Password !!</Text>
+            <Text style={styles.pswdErr}> Incorrect Password !!</Text>
         );
+    } else if (value.errMsg == "dbError"){
+        return(
+            <Text style={styles.dbErr}> Server Problem ! Try again later.</Text>
+        );  
+    } else if (value.errMsg == "networkError"){
+        return(
+            <Text style={styles.dbErr}> Network Error ! </Text>
+        );  
     } else return (
             <Text>  </Text>
     );
 }
+
+const AlertBox = (msg) =>
+  Alert.alert(
+    "Invalid",
+    "You have entered an invalid input. Please try again.",
+    [
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ],
+    { cancelable: false }
+  );
+
+
+
+
 
 const styles = StyleSheet.create({
   inputBox:{
     height:50,
     padding:5,
   },
-  errorText: {
+  pswdErr: {
     color: "red",
     fontSize: 20,
     textAlign: "center",
+    paddingTop:10,
   },
-
+  dbErr: {
+    color: "#757575",
+    fontSize: 20,
+    textAlign: "center",
+    paddingTop:10,
+  },
 });
- 
+export const fetchApi = 'http://10.0.2.2:5000/'; 
 export const globalStyles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#637D63",
@@ -73,4 +104,4 @@ export const globalStyles = StyleSheet.create({
   },
   
 })
-export {InputBox, ErrorText};
+export {InputBox, ErrorText, AlertBox,};
