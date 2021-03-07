@@ -2,9 +2,9 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-  View,
 } from 'react-native';
 import { Appbar } from 'react-native-paper';
+
 import SignInScreen from '../screens/SignIn'
 import SignUpScreen from '../screens/SignUp'
 import HomeScreen from '../screens/Home'

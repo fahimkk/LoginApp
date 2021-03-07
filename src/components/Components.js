@@ -4,13 +4,10 @@ import {
   Dimensions,
   Text,
   Alert,
-  View,
 } from 'react-native';
 import { TextInput, Button, Portal, Dialog, Paragraph } from 'react-native-paper';
-import {Icon} from 'react-native-vector-icons/MaterialIcons';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const InputBox = (args) => {
   var secure = false;
@@ -42,12 +39,16 @@ const ErrorText = (value)=>{
         return(
             <Text style={styles.dbErr}> Network Error ! </Text>
         );  
+    } else if (value.errMsg == "exists"){
+        return(
+            <Text style={styles.dbErr}> Email already exists. </Text>
+        );  
     } else return (
             <Text>  </Text>
     );
 }
 
-const AlertBox = (msg) =>
+const AlertBox = () =>
   Alert.alert(
     "Invalid",
     "You have entered an invalid input. Please try again.",
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     paddingTop:10,
   },
 });
-export const fetchApi = 'http://10.0.2.2:5000/'; 
+
 export const globalStyles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#637D63",
@@ -104,4 +105,5 @@ export const globalStyles = StyleSheet.create({
   },
   
 })
+
 export {InputBox, ErrorText, AlertBox,};

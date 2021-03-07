@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
   View,
-  StyleSheet,
-  Alert
 } from 'react-native';
-import { Button, Portal, Dialog, Paragraph } from 'react-native-paper';
-import {InputBox, ErrorText, globalStyles,fetchApi,AlertBox, } from '../components/Components';
+import { Button } from 'react-native-paper';
+
+import {InputBox, ErrorText, globalStyles,AlertBox, } from '../components/Components';
 import {AuthContext, UserContext} from '../components/Contexts';
+
 
 const SignInScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
@@ -24,7 +24,8 @@ const SignInScreen = ({navigation}) => {
       if (email.trim() == "" || password ==""){
         AlertBox();
       } else{
-        fetch(fetchApi, {
+// 'http://18.191.41.39:8080/'
+        fetch('http://10.0.2.2:5000/', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -77,6 +78,5 @@ const SignInScreen = ({navigation}) => {
     </View>
   );
 }
-
 
 export default SignInScreen;

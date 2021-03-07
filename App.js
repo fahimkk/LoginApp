@@ -3,8 +3,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-  View,
 } from 'react-native';
+
 import {AuthStackContainer, HomeStackContainer} from './src/components/StackComponents'
 import {AuthContext, UserContext} from './src/components/Contexts';
 
@@ -15,10 +15,10 @@ const App = () => {
   const authContext = React.useMemo(()=>{
     return {
       signIn: () => {
-        setUserToken('asdf');
+        setUserToken('true');
       },
       signUp: () => {
-        setUserToken('asdf');
+        setUserToken('true');
       },
       signOut: () => {
         setUserToken();

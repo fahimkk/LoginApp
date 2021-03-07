@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
   View,
-  StyleSheet,
 } from 'react-native';
 import { Button } from 'react-native-paper';
-import {InputBox,ErrorText,AlertBox, globalStyles, fetchApi } from '../components/Components';
+
+import {InputBox,ErrorText,AlertBox, globalStyles,} from '../components/Components';
 import {AuthContext, UserContext} from '../components/Contexts';
 
 const SignUpScreen = ({navigation}) => {
@@ -23,8 +23,9 @@ const SignUpScreen = ({navigation}) => {
     if (username.trim() == "" || email.trim() == "" || password==""){
       AlertBox();
     } else{
+      // 'http://18.191.41.39:8080/signUp'
       console.log(username, email, password);
-      fetch(fetchApi, {
+      fetch( 'http://10.0.2.2:5000/signUp', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-  StyleSheet,
   View,
 } from 'react-native';
 import { Button, Text, Title } from 'react-native-paper';
+
 import {AuthContext, UserContext} from '../components/Contexts';
 import {globalStyles } from '../components/Components';
 
