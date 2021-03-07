@@ -24,8 +24,9 @@ const SignInScreen = ({navigation}) => {
       if (email.trim() == "" || password ==""){
         AlertBox();
       } else{
-// 'http://18.191.41.39:8080/'
-        fetch('http://10.0.2.2:5000/', {
+      // 'http://10.0.2.2:5000/'
+      // 'http://18.191.41.39:8080/'
+        fetch('http://18.191.41.39', {
           method: 'POST',
           headers: {
             Accept: 'application/json',

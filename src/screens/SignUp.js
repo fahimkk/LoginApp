@@ -23,9 +23,9 @@ const SignUpScreen = ({navigation}) => {
     if (username.trim() == "" || email.trim() == "" || password==""){
       AlertBox();
     } else{
-      // 'http://18.191.41.39:8080/signUp'
+      // 'http://10.0.2.2:5000/signUp'
       console.log(username, email, password);
-      fetch( 'http://10.0.2.2:5000/signUp', {
+      fetch( 'http://18.191.41.39/signUp', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
